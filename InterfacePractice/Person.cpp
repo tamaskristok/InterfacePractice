@@ -1,5 +1,12 @@
 #include "Person.h"
 
+Person::Person(unsigned char age, double height, double weight)
+{
+  age = age;
+  height=height;
+  weight=weight; 
+
+}
 int Person::getAge()
 {
 	return age;
@@ -15,14 +22,18 @@ double Person::getWeight()
 	return weight;
 }
 
-bool Person::operator<(const Person& other)
+ bool Person::operator<(const Comparable& other)const
 {
-	return this->age < other.age;
+	const Person *otherperson = dynamic_cast<const Person*> (&other);
+	return this->age < otherperson->age;
+
 }
 
-bool Person::operator==(const Person& other)
+ bool Person::operator==(const Comparable& other)const 
 {
-	return false;
+
+	const Person *otherperson = dynamic_cast<const Person*> (&other);
+	return this->age == otherperson->age && this->height == otherperson->height && this->weight == otherperson->weight ;
 }
 
 void Person::setAge(unsigned char age)
